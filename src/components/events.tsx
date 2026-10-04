@@ -5,16 +5,16 @@ import { Reveal } from "@/components/motion/reveal";
 
 export function Events() {
   return (
-    <section id="events" className="bg-bg py-24 md:py-32">
+    <section id="events" className="bg-bg-elevated py-20 md:py-28">
       <div className="container-page grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <Reveal>
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-lg)] md:aspect-[5/6]">
+          <div className="relative aspect-[4/5] overflow-hidden md:aspect-[5/6]">
             <Image
-              src="/images/product-cake.jpg"
-              alt="עוגה לאירוע"
+              src="/images/real-cake.jpg"
+              alt="עוגת שכבות לאירוע מנוגטין"
               fill
               sizes="(max-width:1024px) 100vw, 48vw"
-              className="object-cover"
+              className="object-cover object-center"
               quality={80}
             />
           </div>
@@ -22,8 +22,8 @@ export function Events() {
 
         <div>
           <Reveal>
-            <p className="text-xs tracking-[0.24em] text-accent">{site.events.eyebrow}</p>
-            <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3.5rem)] font-medium leading-tight text-balance">
+            <p className="eyebrow">{site.events.eyebrow}</p>
+            <h2 className="section-title mt-4 text-[clamp(2rem,4vw,3.2rem)] text-balance">
               {site.events.title}
             </h2>
             <p className="mt-6 max-w-lg text-base leading-8 text-ink-soft md:text-lg">
@@ -36,7 +36,7 @@ export function Events() {
               {site.events.services.map((service) => (
                 <li
                   key={service}
-                  className="border-b border-line-strong pb-1 text-sm text-ink md:text-base"
+                  className="border-b border-gold/40 pb-1 text-sm text-ink md:text-base"
                 >
                   {service}
                 </li>
@@ -46,7 +46,9 @@ export function Events() {
 
           <Reveal delay={0.18}>
             <div className="mt-10">
-              <Button href={site.events.ctaHref}>{site.events.cta}</Button>
+              <Button href={site.events.ctaHref} variant="gold">
+                {site.events.cta}
+              </Button>
             </div>
           </Reveal>
         </div>

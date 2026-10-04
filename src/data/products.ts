@@ -6,24 +6,46 @@ export type Product = {
   image: string;
   aspect: "portrait" | "landscape" | "square";
   featured?: boolean;
+  is3d?: boolean;
 };
 
 export const signatureProducts: Product[] = [
   {
-    id: "challah",
-    name: "חלות שבת",
-    category: "חלות",
-    description: "קלועות זהובות, ריח שמרים וטעם של בית.",
-    image: "/images/product-challah.jpg",
-    aspect: "landscape",
+    id: "croissant",
+    name: "קרואסון חמאה",
+    category: "ויינאסרי",
+    description: "שכבות זהובות, חמאה אמיתית, נאפה מדי בוקר.",
+    image: "/images/3d-croissant.jpg",
+    aspect: "square",
     featured: true,
+    is3d: true,
   },
   {
-    id: "croissants",
-    name: "קרואסונים",
-    category: "קרואסונים",
-    description: "שכבות חמאה פריכות, נאפים מדי בוקר.",
-    image: "/images/product-croissants.jpg",
+    id: "eclair",
+    name: "אקלר שוקולד",
+    category: "פטיסרי",
+    description: "גלזורה מבריקה וקרם עדין בסגנון צרפתי קלאסי.",
+    image: "/images/3d-eclair.jpg",
+    aspect: "square",
+    featured: true,
+    is3d: true,
+  },
+  {
+    id: "tartlette",
+    name: "טארטלט פירות",
+    category: "פטיסרי",
+    description: "בצק פריך, קרם וניל ופירות מבריקים.",
+    image: "/images/3d-tartlette.jpg",
+    aspect: "square",
+    featured: true,
+    is3d: true,
+  },
+  {
+    id: "challah",
+    name: "חלות שבת",
+    category: "מאפייה",
+    description: "קלועות זהובות עם שומשום — טריות מהתנור.",
+    image: "/images/real-challah.jpg",
     aspect: "portrait",
     featured: true,
   },
@@ -31,20 +53,18 @@ export const signatureProducts: Product[] = [
     id: "cakes",
     name: "עוגות הבית",
     category: "עוגות",
-    description: "עוגות לחגיגות ולרגעים קטנים באמצע השבוע.",
-    image: "/images/product-cake.jpg",
+    description: "עוגות שכבות לחגיגות ולרגעים באמצע השבוע.",
+    image: "/images/real-cake.jpg",
     aspect: "landscape",
     featured: true,
   },
 ];
 
 export const categories = [
-  { id: "breads", name: "לחמים", note: "כיכרות יומיום ולחמי מחמצת" },
+  { id: "viennoiserie", name: "ויינאסרי", note: "קרואסונים · בריוש · שכבות חמאה" },
+  { id: "patisserie", name: "פטיסרי", note: "אקלרים · טארטלטים · קינוחים" },
   { id: "challahs", name: "חלות", note: "לשבת ולחגים" },
-  { id: "croissants", name: "קרואסונים", note: "חמאה ושכבות" },
-  { id: "pastries", name: "מאפים", note: "מתוקים ומלוחים" },
   { id: "cakes", name: "עוגות", note: "אישיות ומעוצבות" },
-  { id: "cookies", name: "עוגיות", note: "למארז ולקפה" },
-  { id: "desserts", name: "קינוחים", note: "סיומים עדינים" },
+  { id: "bagels", name: "בייגלים", note: "טריים מהתנור" },
   { id: "platters", name: "מגשי אירוח", note: "לשולחן ולאירוע" },
 ] as const;

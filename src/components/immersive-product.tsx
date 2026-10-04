@@ -18,42 +18,46 @@ export function ImmersiveProduct() {
     offset: ["start end", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [60, -60]);
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], reduce ? [1, 1, 1] : [0.92, 1, 0.96]);
-  const textY = useTransform(scrollYProgress, [0.15, 0.55], reduce ? [0, 0] : [40, 0]);
-  const textOpacity = useTransform(scrollYProgress, [0.15, 0.4], reduce ? [1, 1] : [0, 1]);
+  const y = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [70, -70]);
+  const rotate = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [-6, 6]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], reduce ? [1, 1, 1] : [0.88, 1.04, 0.96]);
+  const textY = useTransform(scrollYProgress, [0.1, 0.45], reduce ? [0, 0] : [36, 0]);
+  const textOpacity = useTransform(scrollYProgress, [0.12, 0.4], reduce ? [1, 1] : [0, 1]);
+  const glow = useTransform(scrollYProgress, [0.2, 0.55, 0.9], [0.15, 0.35, 0.15]);
 
   return (
-    <section
-      ref={ref}
-      className="relative min-h-[120svh] overflow-hidden bg-[#1a1511] text-bg-elevated"
-    >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_40%,#3a2a1f_0%,#1a1511_55%)]" />
+    <section ref={ref} className="relative min-h-[110svh] overflow-hidden bg-bg-soft">
+      <motion.div
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[55vmax] w-[55vmax] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/20 blur-3xl"
+        style={{ opacity: glow }}
+        aria-hidden
+      />
 
-      <div className="relative container-page grid min-h-[120svh] items-center gap-10 py-24 md:grid-cols-2 md:gap-8">
-        <motion.div style={{ y: textY, opacity: textOpacity }} className="order-2 md:order-1">
-          <p className="text-xs tracking-[0.24em] text-accent-soft">רגע של מאפה</p>
-          <h2 className="mt-4 font-display text-[clamp(2.4rem,5vw,4.5rem)] font-medium leading-[1.05]">
+      <div className="relative container-page grid min-h-[110svh] items-center gap-10 py-20 md:grid-cols-2">
+        <motion.div
+          style={{ opacity: textOpacity, y: textY }}
+          className="order-2 text-center md:order-1 md:text-start"
+        >
+          <p className="eyebrow">רגע של פטיסרי</p>
+          <h2 className="section-title mt-4 text-[clamp(2.2rem,4.5vw,3.8rem)]">
             {site.immersive.title}
           </h2>
-          <p className="mt-6 max-w-md text-base leading-8 text-bg-elevated/80 md:text-lg">
+          <p className="mx-auto mt-6 max-w-md text-base leading-8 text-ink-soft md:mx-0 md:text-lg">
             {site.immersive.body}
           </p>
-          <p className="mt-8 text-sm tracking-[0.2em] text-accent-soft">
-            {site.immersive.detail}
-          </p>
+          <p className="mt-8 text-sm tracking-[0.2em] text-gold-deep">{site.immersive.detail}</p>
         </motion.div>
 
         <motion.div
-          style={{ y, scale }}
-          className="relative order-1 mx-auto aspect-square w-full max-w-md md:order-2 md:max-w-none"
+          style={{ y, scale, rotate }}
+          className="relative order-1 mx-auto aspect-square w-full max-w-md md:order-2 md:max-w-lg"
         >
           <Image
-            src="/images/immersive-pastry.jpg"
-            alt="מאפה שוקולד פריך"
+            src={site.immersive.image}
+            alt="אקלר שוקולד תלת־ממדי"
             fill
             sizes="(max-width:768px) 90vw, 42vw"
-            className="object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.45)]"
+            className="float-3d object-contain"
             quality={85}
           />
         </motion.div>

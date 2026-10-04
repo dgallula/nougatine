@@ -1,25 +1,39 @@
+"use client";
+
+import { motion, useReducedMotion } from "motion/react";
 import { categories } from "@/data/products";
 import { Reveal } from "@/components/motion/reveal";
+import { easeOut } from "@/lib/motion";
 
 export function Categories() {
+  const reduce = useReducedMotion();
+
   return (
-    <section id="cakes" className="bg-bg-elevated py-24 md:py-28">
+    <section className="bg-bg-elevated py-16 md:py-20">
       <div className="container-page">
         <Reveal>
-          <h2 className="font-display text-[clamp(2rem,4vw,3.25rem)] font-medium">
+          <h2 className="section-title mb-10 text-center text-[clamp(1.8rem,3.5vw,2.6rem)]">
             מה תמצאו אצלנו
           </h2>
         </Reveal>
 
-        <div className="mt-12 grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-3">
           {categories.map((category, i) => (
-            <Reveal key={category.id} delay={i * 0.04}>
-              <div className="group flex h-full flex-col justify-between bg-bg-elevated p-6 transition-colors duration-300 hover:bg-bg md:p-8">
-                <p className="font-display text-2xl md:text-[1.75rem]">{category.name}</p>
-                <p className="mt-6 text-sm text-ink-soft transition-transform duration-500 group-hover:-translate-y-0.5">
-                  {category.note}
+            <Reveal key={category.id} delay={i * 0.05}>
+              <motion.div
+                className="group flex h-full min-h-[140px] flex-col justify-between bg-bg-elevated p-7"
+                whileHover={
+                  reduce
+                    ? undefined
+                    : { backgroundColor: "var(--bg-soft)", y: -2 }
+                }
+                transition={{ duration: 0.4, ease: easeOut }}
+              >
+                <p className="font-display text-xl transition-transform duration-500 group-hover:-translate-y-0.5 md:text-2xl">
+                  {category.name}
                 </p>
-              </div>
+                <p className="mt-6 text-sm text-ink-soft">{category.note}</p>
+              </motion.div>
             </Reveal>
           ))}
         </div>

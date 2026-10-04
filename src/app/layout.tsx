@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Frank_Ruhl_Libre, Heebo } from "next/font/google";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { ScrollProgress } from "@/components/motion/scroll-progress";
+import { WhatsAppFab } from "@/components/whatsapp-button";
 import { site } from "@/data/site";
 import "./globals.css";
 
@@ -32,9 +34,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${frank.variable} ${heebo.variable} h-full scroll-smooth`}
     >
       <body className="flex min-h-full flex-col bg-bg font-body text-ink antialiased">
+        <ScrollProgress />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <WhatsAppFab />
       </body>
     </html>
   );

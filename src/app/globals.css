@@ -1,41 +1,46 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #ebe6de;
-  --bg-elevated: #f5f1ea;
-  --bg-deep: #2a221c;
-  --ink: #1e1814;
-  --ink-soft: #5f544c;
-  --ink-faint: #8a7e74;
-  --accent: #7a4f32;
-  --accent-soft: #c4a574;
-  --line: #d4cbbd;
-  --line-strong: #b9ad9c;
-  --overlay: rgb(30 24 20 / 0.42);
+  /* Moulin Doré–inspired: cream, gold, noir — French boutique */
+  --bg: #faf8f4;
+  --bg-elevated: #ffffff;
+  --bg-soft: #f3eee6;
+  --bg-deep: #1a1612;
+  --ink: #1a1612;
+  --ink-soft: #5c534a;
+  --ink-faint: #8a8176;
+  --gold: #b8955a;
+  --gold-soft: #d4b87a;
+  --gold-deep: #8a6a35;
+  --line: #e6dfd3;
+  --line-strong: #cfc4b4;
+  --overlay: rgb(18 14 10 / 0.48);
 
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.875rem;
+  --radius-sm: 0.125rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.5rem;
 
-  --container: 72rem;
-  --container-narrow: 42rem;
-
-  --header-h: 4.5rem;
+  --container: 74rem;
+  --container-narrow: 40rem;
+  --header-h: 7.25rem;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --duration: 700ms;
 }
 
 @theme inline {
   --color-bg: var(--bg);
   --color-bg-elevated: var(--bg-elevated);
+  --color-bg-soft: var(--bg-soft);
   --color-bg-deep: var(--bg-deep);
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
   --color-ink-faint: var(--ink-faint);
-  --color-accent: var(--accent);
-  --color-accent-soft: var(--accent-soft);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-gold-deep: var(--gold-deep);
   --color-line: var(--line);
   --color-line-strong: var(--line-strong);
+  --color-accent: var(--gold);
+  --color-accent-soft: var(--gold-soft);
   --font-display: var(--font-frank);
   --font-body: var(--font-heebo);
   --radius-sm: var(--radius-sm);
@@ -75,7 +80,7 @@
   }
 
   ::selection {
-    background: color-mix(in oklab, var(--accent-soft) 55%, white);
+    background: color-mix(in oklab, var(--gold-soft) 50%, white);
     color: var(--ink);
   }
 
@@ -111,7 +116,45 @@
     text-wrap: balance;
   }
 
-  .grain {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  .section-title {
+    font-family: var(--font-frank), serif;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  .eyebrow {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+
+  .btn-outline-light {
+    border: 1px solid rgb(255 255 255 / 0.85);
+    color: #fff;
+    background: transparent;
+    padding: 0.85rem 1.75rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    transition: background-color 0.35s var(--ease-out), color 0.35s var(--ease-out);
+  }
+
+  .btn-outline-light:hover {
+    background: #fff;
+    color: var(--ink);
+  }
+
+  .float-3d {
+    filter: drop-shadow(0 28px 40px rgb(26 22 18 / 0.22));
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .smooth-hover {
+      transition:
+        transform 0.45s var(--ease-out),
+        opacity 0.45s var(--ease-out);
+    }
   }
 }
