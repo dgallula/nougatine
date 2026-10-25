@@ -19,6 +19,9 @@
 
 # production
 /build
+*.zip
+nougatine-o2switch.zip
+/nougatine-o2switch/
 
 # misc
 .DS_Store

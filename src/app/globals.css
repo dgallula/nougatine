@@ -1,20 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  /* Moulin Doré–inspired: cream, gold, noir — French boutique */
-  --bg: #faf8f4;
-  --bg-elevated: #ffffff;
-  --bg-soft: #f3eee6;
-  --bg-deep: #1a1612;
-  --ink: #1a1612;
-  --ink-soft: #5c534a;
-  --ink-faint: #8a8176;
-  --gold: #b8955a;
-  --gold-soft: #d4b87a;
-  --gold-deep: #8a6a35;
-  --line: #e6dfd3;
-  --line-strong: #cfc4b4;
-  --overlay: rgb(18 14 10 / 0.48);
+  /* Moulin Doré model: warm cream, soft gold, charcoal — French boutique */
+  --bg: #f7f3ec;
+  --bg-elevated: #fffcf7;
+  --bg-soft: #efe8dc;
+  --bg-deep: #14110e;
+  --ink: #14110e;
+  --ink-soft: #5a5248;
+  --ink-faint: #8c8478;
+  --gold: #c4a15c;
+  --gold-soft: #ddc48a;
+  --gold-deep: #8f6f32;
+  --line: #e4dccf;
+  --line-strong: #cbbfae;
+  --overlay: rgb(18 14 10 / 0.45);
 
   --radius-sm: 0.125rem;
   --radius-md: 0.25rem;
@@ -41,8 +41,8 @@
   --color-line-strong: var(--line-strong);
   --color-accent: var(--gold);
   --color-accent-soft: var(--gold-soft);
-  --font-display: var(--font-frank);
-  --font-body: var(--font-heebo);
+  --font-display: var(--font-display-face);
+  --font-body: var(--font-body-face);
   --radius-sm: var(--radius-sm);
   --radius-md: var(--radius-md);
   --radius-lg: var(--radius-lg);
@@ -75,8 +75,9 @@
   body {
     background: var(--bg);
     color: var(--ink);
-    font-family: var(--font-heebo), "Segoe UI", sans-serif;
+    font-family: var(--font-body-face), "Segoe UI", sans-serif;
     text-rendering: optimizeLegibility;
+    letter-spacing: 0.01em;
   }
 
   ::selection {
@@ -117,17 +118,17 @@
   }
 
   .section-title {
-    font-family: var(--font-frank), serif;
+    font-family: var(--font-display-face), "Times New Roman", serif;
     font-weight: 500;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
+    letter-spacing: 0;
+    line-height: 1.2;
   }
 
   .eyebrow {
-    font-size: 0.7rem;
+    font-family: var(--font-body-face), sans-serif;
+    font-size: 0.78rem;
     font-weight: 500;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
+    letter-spacing: 0.08em;
     color: var(--gold-deep);
   }
 
@@ -136,8 +137,8 @@
     color: #fff;
     background: transparent;
     padding: 0.85rem 1.75rem;
-    font-size: 0.8rem;
-    letter-spacing: 0.14em;
+    font-size: 0.9rem;
+    letter-spacing: 0.03em;
     transition: background-color 0.35s var(--ease-out), color 0.35s var(--ease-out);
   }
 
@@ -148,6 +149,30 @@
 
   .float-3d {
     filter: drop-shadow(0 28px 40px rgb(26 22 18 / 0.22));
+  }
+
+  .hero-title-shine {
+    background-image: linear-gradient(
+      110deg,
+      #fff 0%,
+      #fff 42%,
+      #f6e7c1 50%,
+      #fff 58%,
+      #fff 100%
+    );
+    background-size: 220% 100%;
+    background-clip: text;
+    color: transparent;
+    animation: hero-shine 8s ease-in-out infinite;
+  }
+
+  @keyframes hero-shine {
+    0% {
+      background-position: 120% 0;
+    }
+    100% {
+      background-position: -120% 0;
+    }
   }
 
   @media (prefers-reduced-motion: no-preference) {

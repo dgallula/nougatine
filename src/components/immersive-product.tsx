@@ -45,19 +45,19 @@ export function ImmersiveProduct() {
           <p className="mx-auto mt-6 max-w-md text-base leading-8 text-ink-soft md:mx-0 md:text-lg">
             {site.immersive.body}
           </p>
-          <p className="mt-8 text-sm tracking-[0.2em] text-gold-deep">{site.immersive.detail}</p>
+          <p className="mt-8 text-sm tracking-[0.04em] text-gold-deep">{site.immersive.detail}</p>
         </motion.div>
 
         <motion.div
           style={{ y, scale, rotate }}
-          className="relative order-1 mx-auto aspect-square w-full max-w-md md:order-2 md:max-w-lg"
+          className="relative order-1 mx-auto aspect-square w-full max-w-[22rem] overflow-hidden md:order-2 md:max-w-md"
         >
           <Image
             src={site.immersive.image}
             alt="אקלר שוקולד תלת־ממדי"
             fill
-            sizes="(max-width:768px) 90vw, 42vw"
-            className="float-3d object-contain"
+            sizes="(max-width:768px) 90vw, 28rem"
+            className="float-3d object-contain p-[8%]"
             quality={85}
           />
         </motion.div>

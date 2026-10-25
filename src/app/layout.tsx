@@ -1,29 +1,63 @@
 import type { Metadata } from "next";
-import { Frank_Ruhl_Libre, Heebo } from "next/font/google";
+import { Assistant, Noto_Serif_Hebrew } from "next/font/google";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { ScrollProgress } from "@/components/motion/scroll-progress";
 import { WhatsAppFab } from "@/components/whatsapp-button";
+import { absoluteUrl, defaultOgImage, seo, siteUrl } from "@/data/seo";
 import { site } from "@/data/site";
 import "./globals.css";
 
-const frank = Frank_Ruhl_Libre({
-  variable: "--font-frank",
+const display = Noto_Serif_Hebrew({
+  variable: "--font-display-face",
   subsets: ["hebrew", "latin"],
-  weight: ["400", "500", "700"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
-const heebo = Heebo({
-  variable: "--font-heebo",
+const body = Assistant({
+  variable: "--font-body-face",
   subsets: ["hebrew", "latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: `${site.nameHe} | ${site.tagline}`,
-  description: `${site.nameHe} — ${site.tagline}. ${site.hero.subtitle}`,
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: seo.home.title,
+    template: `%s | ${site.nameHe}`,
+  },
+  description: seo.home.description,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "he_IL",
+    url: siteUrl,
+    siteName: site.nameHe,
+    title: seo.home.title,
+    description: seo.home.description,
+    images: [
+      {
+        url: absoluteUrl(defaultOgImage),
+        width: 1200,
+        height: 630,
+        alt: `${site.nameHe}, ויטרינת פטיסרי בהר נוף`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: seo.home.title,
+    description: seo.home.description,
+    images: [absoluteUrl(defaultOgImage)],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -31,7 +65,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="he"
       dir="rtl"
-      className={`${frank.variable} ${heebo.variable} h-full scroll-smooth`}
+      className={`${display.variable} ${body.variable} h-full scroll-smooth`}
     >
       <body className="flex min-h-full flex-col bg-bg font-body text-ink antialiased">
         <ScrollProgress />

@@ -1,12 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import { galleryItems } from "@/data/gallery";
+import { MediaFrame } from "@/components/media-frame";
 import { ImageReveal } from "@/components/motion/image-reveal";
 import { Reveal } from "@/components/motion/reveal";
 import { easeOut } from "@/lib/motion";
-import { cn } from "@/lib/cn";
 
 export function Gallery() {
   const reduce = useReducedMotion();
@@ -24,40 +23,22 @@ export function Gallery() {
           </div>
         </Reveal>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-12 md:gap-5">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
           {galleryItems.map((item, i) => (
-            <Reveal
-              key={item.id}
-              delay={i * 0.06}
-              className={cn(
-                item.span === "wide" && "md:col-span-7",
-                item.span === "tall" && "md:col-span-5",
-              )}
-            >
-              <ImageReveal delay={i * 0.04}>
+            <Reveal key={item.id} delay={i * 0.05}>
+              <ImageReveal delay={i * 0.03}>
                 <motion.figure
-                  className={cn(
-                    "relative overflow-hidden bg-bg-soft",
-                    item.span === "wide" && "aspect-[16/10]",
-                    item.span === "tall" && "aspect-[4/5]",
-                  )}
-                  whileHover={reduce ? undefined : { scale: 1.01 }}
-                  transition={{ duration: 0.6, ease: easeOut }}
+                  className="m-0"
+                  whileHover={reduce ? undefined : { y: -3 }}
+                  transition={{ duration: 0.45, ease: easeOut }}
                 >
-                  <motion.div
-                    className="absolute inset-0"
-                    whileHover={reduce ? undefined : { scale: 1.06 }}
-                    transition={{ duration: 0.9, ease: easeOut }}
-                  >
-                    <Image
-                      src={item.src}
-                      alt={item.alt}
-                      fill
-                      sizes="(max-width:768px) 100vw, 50vw"
-                      className="object-cover"
-                      quality={80}
-                    />
-                  </motion.div>
+                  <MediaFrame
+                    src={item.src}
+                    alt={item.alt}
+                    ratio="portrait"
+                    sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
+                    quality={80}
+                  />
                 </motion.figure>
               </ImageReveal>
             </Reveal>

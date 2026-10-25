@@ -1,6 +1,6 @@
-import Image from "next/image";
 import { site } from "@/data/site";
 import { Button } from "@/components/ui/button";
+import { MediaFrame } from "@/components/media-frame";
 import { Reveal } from "@/components/motion/reveal";
 
 export function Events() {
@@ -8,16 +8,13 @@ export function Events() {
     <section id="events" className="bg-bg-elevated py-20 md:py-28">
       <div className="container-page grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <Reveal>
-          <div className="relative aspect-[4/5] overflow-hidden md:aspect-[5/6]">
-            <Image
-              src="/images/real-cake.jpg"
-              alt="עוגת שכבות לאירוע מנוגטין"
-              fill
-              sizes="(max-width:1024px) 100vw, 48vw"
-              className="object-cover object-center"
-              quality={80}
-            />
-          </div>
+          <MediaFrame
+            src="/images/real-croquembouche.jpg"
+            alt="קרוקמבוש מפואר לאירוע בנוגטין"
+            ratio="portrait"
+            sizes="(max-width:1024px) 100vw, 48vw"
+            quality={80}
+          />
         </Reveal>
 
         <div>

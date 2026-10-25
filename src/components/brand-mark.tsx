@@ -9,9 +9,9 @@ type BrandMarkProps = {
 };
 
 const sizes = {
-  sm: { width: 140, height: 56, className: "h-10 w-auto md:h-11" },
-  md: { width: 180, height: 72, className: "h-12 w-auto md:h-14" },
-  lg: { width: 240, height: 96, className: "h-16 w-auto md:h-20" },
+  sm: { width: 220, height: 220, className: "h-20 w-20 md:h-24 md:w-24" },
+  md: { width: 320, height: 320, className: "h-28 w-28 md:h-32 md:w-32" },
+  lg: { width: 420, height: 420, className: "h-36 w-36 md:h-44 md:w-44" },
 } as const;
 
 export function BrandMark({ className, priority = false, size = "md" }: BrandMarkProps) {
@@ -20,12 +20,12 @@ export function BrandMark({ className, priority = false, size = "md" }: BrandMar
   return (
     <Image
       src={site.logo}
-      alt={`${site.nameHe} — ${site.tagline}`}
+      alt={`${site.nameEn} / ${site.nameHe}`}
       width={s.width}
       height={s.height}
       priority={priority}
       className={cn(
-        "object-contain drop-shadow-[0_2px_10px_rgba(0,0,0,0.25)]",
+        "rounded-full object-cover object-center",
         s.className,
         className,
       )}

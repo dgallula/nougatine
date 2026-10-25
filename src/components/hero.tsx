@@ -4,7 +4,6 @@ import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 import { site } from "@/data/site";
-import { Button } from "@/components/ui/button";
 import { easeOut } from "@/lib/motion";
 
 export function Hero() {
@@ -30,20 +29,20 @@ export function Hero() {
       <motion.div className="absolute inset-0" style={{ y: bgY, scale: bgScale }}>
         <Image
           src={site.hero.image}
-          alt="מבחר פטיסרי צרפתי בנוגטין"
+          alt=""
           fill
           priority
           sizes="100vw"
           className="object-cover object-center"
           quality={85}
         />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,10,8,0.55)_0%,rgba(12,10,8,0.42)_45%,rgba(12,10,8,0.72)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,10,8,0.42)_0%,rgba(12,10,8,0.28)_40%,rgba(12,10,8,0.62)_100%)]" />
       </motion.div>
 
-      {/* Floating 3D croissant — scroll parallax + idle float */}
       <motion.div
-        className="pointer-events-none absolute left-[2%] top-[18%] z-[1] hidden w-[min(36vw,360px)] lg:block"
+        className="pointer-events-none absolute left-[2%] top-[18%] z-[1] hidden w-[min(36vw,360px)] mix-blend-multiply lg:block"
         style={{ y: objectY }}
+        aria-hidden
       >
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 50, rotate: -10, scale: 0.92 }}
@@ -70,27 +69,38 @@ export function Hero() {
             width={720}
             height={720}
             className="float-3d h-auto w-full object-contain"
-            priority
-            quality={85}
+            loading="lazy"
+            quality={75}
           />
         </motion.div>
       </motion.div>
 
       <motion.div
-        className="relative z-[2] container-page flex min-h-[100svh] flex-col items-center justify-center px-4 pb-16 pt-36 text-center md:pt-40"
+        className="relative z-[2] container-page flex min-h-[100svh] flex-col items-center justify-center px-4 pb-16 pt-32 text-center md:pt-36"
         style={{ y: contentY, opacity: contentOpacity }}
       >
         <motion.p
-          className="text-[0.7rem] font-medium tracking-[0.35em] text-gold-soft md:text-xs"
-          initial={reduce ? false : { opacity: 0, y: 18, letterSpacing: "0.5em" }}
-          animate={{ opacity: 1, y: 0, letterSpacing: "0.35em" }}
+          className="font-display text-[clamp(1.2rem,2.8vw,1.85rem)] font-medium tracking-[0.04em] text-white/95"
+          initial={reduce ? false : { opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.15, ease: easeOut }}
         >
           {site.hero.eyebrow}
         </motion.p>
 
+        <motion.p
+          className="mt-4 text-sm tracking-[0.14em] text-gold-soft"
+          initial={reduce ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.2, ease: easeOut }}
+        >
+          {site.nameEn}
+          <span className="mx-2 text-white/40">·</span>
+          {site.nameEnCoffee}
+        </motion.p>
+
         <motion.h1
-          className="mt-4 max-w-4xl font-display text-[clamp(2.4rem,7vw,5.25rem)] font-medium leading-[1.08] text-balance"
+          className="hero-title-shine mt-2 max-w-4xl font-display text-[clamp(2.4rem,6vw,4.6rem)] font-medium leading-[1.12] text-balance"
           initial={reduce ? false : { opacity: 0, y: 40, filter: "blur(8px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 1.15, delay: 0.28, ease: easeOut }}
@@ -99,35 +109,24 @@ export function Hero() {
         </motion.h1>
 
         <motion.p
-          className="mt-5 max-w-xl text-sm leading-8 text-white/85 md:text-base md:leading-8"
-          initial={reduce ? false : { opacity: 0, y: 22 }}
+          className="mt-4 text-base text-white/80"
+          initial={reduce ? false : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.95, delay: 0.48, ease: easeOut }}
+          transition={{ duration: 0.9, delay: 0.45, ease: easeOut }}
         >
-          {site.hero.subtitle}
+          {site.nameHe}
+          <span className="mx-2 text-white/35">·</span>
+          {site.nameHeCoffee}
         </motion.p>
 
         <motion.div
-          className="mt-8"
-          initial={reduce ? false : { opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.85, delay: 0.62, ease: easeOut }}
-          whileHover={reduce ? undefined : { scale: 1.03 }}
-          whileTap={reduce ? undefined : { scale: 0.98 }}
-        >
-          <Button href={site.hero.ctaHref} variant="outlineLight">
-            {site.hero.cta}
-          </Button>
-        </motion.div>
-
-        <motion.div
-          className="mt-14 grid w-full max-w-4xl grid-cols-2 gap-3 md:mt-16 md:grid-cols-4 md:gap-4"
+          className="mt-8 grid w-full max-w-4xl grid-cols-2 gap-3 md:mt-10 md:grid-cols-4 md:gap-4"
           initial="hidden"
           animate="visible"
           variants={{
             hidden: {},
             visible: {
-              transition: { staggerChildren: 0.1, delayChildren: 0.75 },
+              transition: { staggerChildren: 0.1, delayChildren: 0.55 },
             },
           }}
         >
@@ -135,7 +134,7 @@ export function Hero() {
             <motion.a
               key={link.href + link.label}
               href={link.href}
-              className="border border-white/70 bg-black/20 px-3 py-4 text-[0.7rem] tracking-[0.14em] text-white backdrop-blur-[2px] md:text-xs"
+              className="border border-white/75 bg-black/15 px-3 py-5 text-[0.8rem] tracking-[0.04em] text-white backdrop-blur-[2px] md:text-[0.85rem]"
               variants={
                 reduce
                   ? undefined
@@ -158,7 +157,7 @@ export function Hero() {
 
         {!reduce && (
           <motion.div
-            className="absolute bottom-6 flex flex-col items-center gap-2 text-[0.65rem] tracking-[0.22em] text-white/55"
+            className="absolute bottom-6 flex flex-col items-center gap-2 text-[0.7rem] tracking-[0.08em] text-white/55"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.4, duration: 0.8 }}

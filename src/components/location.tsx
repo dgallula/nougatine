@@ -1,75 +1,39 @@
+import type { ReactNode } from "react";
 import { contact } from "@/data/contact";
 import { site } from "@/data/site";
 import { KashrutBadge } from "@/components/kashrut-badge";
 import { Reveal } from "@/components/motion/reveal";
+import { Button } from "@/components/ui/button";
 
-function Field({
-  label,
-  value,
-  verified,
-  href,
-}: {
-  label: string;
-  value: string;
-  verified: boolean;
-  href?: string;
-}) {
-  const content = href ? (
-    <a
-      href={href}
-      target={href.startsWith("http") ? "_blank" : undefined}
-      rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-      className="underline-offset-4 hover:underline"
-    >
-      {value}
-    </a>
-  ) : (
-    value
-  );
-
+function Field({ label, children }: { label: string; children: ReactNode }) {
   return (
     <div className="border-t border-line py-5">
-      <dt className="text-xs tracking-[0.18em] text-ink-faint">{label}</dt>
-      <dd className="mt-2 text-base md:text-lg">
-        {content}
-        {!verified && (
-          <span className="mr-2 text-xs text-accent"> · לאימות</span>
-        )}
-      </dd>
+      <dt className="text-xs tracking-[0.04em] text-ink-faint">{label}</dt>
+      <dd className="mt-2 text-base md:text-lg">{children}</dd>
     </div>
   );
 }
 
 export function Location() {
-  const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(contact.mapQuery.value)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+  const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(contact.mapQuery)}&t=&z=16&ie=UTF8&iwloc=&output=embed`;
 
   return (
-    <section id="contact" className="bg-bg py-24 md:py-32">
+    <section id="contact" className="bg-bg py-24 md:py-32" aria-labelledby="contact-heading">
       <div className="container-page grid gap-12 lg:grid-cols-2 lg:gap-16">
         <div>
           <Reveal>
-            <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] font-medium leading-tight">
+            <h2 id="contact-heading" className="section-title text-[clamp(2rem,4vw,3.5rem)] leading-tight">
               {site.location.title}
             </h2>
-            <p className="mt-5 max-w-md text-base leading-8 text-ink-soft">
-              {site.location.body}
-            </p>
+            <p className="mt-5 max-w-md text-base leading-8 text-ink-soft">{site.location.body}</p>
           </Reveal>
 
           <Reveal delay={0.1}>
             <dl className="mt-10">
-              <Field
-                label="שכונה"
-                value={contact.neighborhood.value}
-                verified={contact.neighborhood.verified}
-              />
-              <Field
-                label="כתובת"
-                value={contact.address.value}
-                verified={contact.address.verified}
-              />
+              <Field label="שכונה">{contact.neighborhood}</Field>
+              <Field label="כתובת">{contact.postalAddressDisplay}</Field>
               <div className="border-t border-line py-5">
-                <dt className="text-xs tracking-[0.18em] text-ink-faint">וואטסאפ</dt>
+                <dt className="text-xs tracking-[0.04em] text-ink-faint">וואטסאפ</dt>
                 <dd className="mt-3 flex flex-wrap items-center gap-4">
                   <a
                     href={contact.whatsapp.href}
@@ -89,38 +53,53 @@ export function Location() {
                       rel="noopener noreferrer"
                       className="text-base underline-offset-4 hover:underline md:text-lg"
                     >
-                      {contact.whatsapp.value}
+                      {contact.whatsapp.display}
                     </a>
                     <p className="mt-1 text-sm text-ink-soft">לחצו לפתיחת שיחה בוואטסאפ</p>
                   </div>
                 </dd>
               </div>
-              <Field
-                label="שעות פתיחה"
-                value={contact.hours.value}
-                verified={contact.hours.verified}
-              />
+              <Field label="שעות פתיחה">
+                <span>{contact.hours.display}</span>
+                <p className="mt-1 text-sm text-ink-soft">{contact.hours.detail}</p>
+              </Field>
               <div className="border-t border-line py-5">
-                <dt className="mb-3 text-xs tracking-[0.18em] text-ink-faint">הכשר</dt>
+                <dt className="mb-3 text-xs tracking-[0.04em] text-ink-faint">כשרות</dt>
                 <dd>
                   <KashrutBadge />
                 </dd>
               </div>
             </dl>
           </Reveal>
+
+          <Reveal delay={0.15}>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Button href={contact.maps.google} target="_blank" rel="noopener noreferrer">
+                ניווט בגוגל מפות
+              </Button>
+              <Button
+                href={contact.maps.waze}
+                variant="ghost"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                ניווט בווייז
+              </Button>
+            </div>
+          </Reveal>
         </div>
 
         <Reveal delay={0.12}>
-          <div className="overflow-hidden rounded-[var(--radius-lg)] border border-line bg-bg-elevated">
+          <div className="overflow-hidden border border-line bg-bg-elevated">
             <iframe
-              title="מפת נוגטין בהר נוף"
+              title="מפת נוגטין ברחוב שאולזון 51, הר נוף"
               src={mapSrc}
-              className="aspect-[4/3] w-full grayscale-[20%] contrast-[0.95] md:aspect-square"
+              className="aspect-[4/3] w-full grayscale-[15%] contrast-[0.95] md:aspect-square"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />
             <p className="px-5 py-4 text-xs leading-6 text-ink-faint">
-              {contact.address.value}
+              {contact.postalAddressDisplay}
             </p>
           </div>
         </Reveal>
